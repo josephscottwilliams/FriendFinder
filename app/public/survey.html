@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Friend Finder</title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="home-survey-custom-container">
+        <!-- About You Section Start -->
+        <form>
+            <p><strong>About You</strong></p>
+            <div class="form-group">
+                <label for="formGroupExampleInput">Name (Required)</label>
+                <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="Name here">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2" id="photo">Link to photo image (Required)</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="examplephoto.jpg">
+            </div>
+        </form>
+        <!-- About You Section End -->
+        <!-- Survey Start -->
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" role="form">
+                    <div class="form-group">
+                        <label for="questionOne">What would you do for a Klondike Bar?</label>
+                        <select class="form-control" id="question1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+
+        <!-- Submit Button Start -->
+        <button type="button" class="btn btn-primary" id="submit">Submit</button>
+        <!-- Submit Button End -->
+        <!-- Survey End -->
+        <!-- Footer -->
+        <hr>
+        <a href="api/friends">API Friends List |</a>
+        <a href="#">Git Hub Repo</a>
+    </div>
+    
+<script type="text/javascript">
+    // Question: What does this code do?
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+      var newFriend = {
+        name: $("#formGroupExampleInput1").val().trim(),
+        photo: $("#formGroupExampleInput2").val().trim(),
+        scores: $("#question1").val()
+      }
+      // Question: What does this code do??
+      console.log(newFriend);
+      $.post("api/friends", newFriend)
+        .done(function(data) {
+          console.log(data);
+          alert("Adding friend...");
+        });
+    });
+    </script>
+</body>
+</html>
